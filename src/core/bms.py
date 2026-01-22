@@ -38,6 +38,7 @@ class BMSManager:
         if not self.is_connected():
             raise ConnectionError("Not connected to BMS")
             
+        self.ser.reset_input_buffer()
         self.ser.write(b'READ_ALL\n')
         line = self.ser.readline().decode().strip()
         if not line:
