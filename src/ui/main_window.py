@@ -200,7 +200,12 @@ class BMSGUIMain(QWidget):
 
     def read_bms(self):
         try:
-            data = self.bms_manager.read_data(simulation_mode=self.simulation_mode.isChecked())
+            if self.simulation_mode.isChecked():
+                QMessageBox.information(self, "Simulation Mode", "Reading generated FAKE data.")
+                data = self.bms_manager.read_data(simulation_mode=True)
+            else:
+                data = self.bms_manager.read_data(simulation_mode=False)
+            
             self.data_cache = data # Store for plotting/reporting
             
             # Update labels with .get() for robustness

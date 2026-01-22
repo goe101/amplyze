@@ -50,8 +50,8 @@ void setup() {
 
   // I2C Scanner
   Serial.println("Scanning I2C bus...");
-  byte count = 0;
-  for (byte i = 8; i < 120; i++) {
+  uint8_t count = 0;
+  for (uint8_t i = 8; i < 120; i++) {
     Wire.beginTransmission(i);
     if (Wire.endTransmission() == 0) {
       Serial.print("Found I2C device at: 0x");
