@@ -47,6 +47,23 @@ void setup() {
   delay(1000);
 
   Serial.println("ESP32 SMBus Battery Reader Started");
+
+  // I2C Scanner
+  Serial.println("Scanning I2C bus...");
+  byte count = 0;
+  for (byte i = 8; i < 120; i++) {
+    Wire.beginTransmission(i);
+    if (Wire.endTransmission() == 0) {
+      Serial.print("Found I2C device at: 0x");
+      Serial.println(i, HEX);
+      count++;
+    }
+  }
+  if (count == 0) {
+    Serial.println("No I2C devices found! Check wiring.");
+  } else {
+    Serial.println("I2C Scan complete.");
+  }
 }
 
 void loop() {
